@@ -1,4 +1,5 @@
 const express = require('express');
+const body = require('body-parser');
 const app = express();
 
 
@@ -7,9 +8,19 @@ app.set('views','./public'); //设置模板默认路径
 
 app.use('/node_modules',express.static('./node_modules')); //托管资源
 
-app.get('/',(req,res)=>{
-    res.render('index.ejs',{});
-})
+//body-barter中间件注册
+app.use(body.urlencoded({extended: false}))
+
+
+
+
+//导入首页路由
+const indexRouter = require('./router/index');
+app.use(indexRouter);
+//导入用户路由
+const userRouter = require('./router/user');
+app.use(userRouter);
+
 
 
 app.listen(80,()=>{
