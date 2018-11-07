@@ -3,7 +3,8 @@ const conn = require('../db/db');
 //导入转换markdown格式中间件
 const marked = require('marked');
 module.exports = {
-    handleArticalAddGet: (req,res)=>{
+    //文章添加get请求
+    handleArticleAddGet: (req,res)=>{
         //验证如果没登录,则返回首页
         if(!req.session.isLogin) return res.redirect('/');
         
@@ -12,7 +13,8 @@ module.exports = {
             isLogin: req.session.isLogin
         })
     },
-    handleArticalAddPost: (req,res)=>{
+    //文章添加post请求
+    handleArticleAddPost: (req,res)=>{
         //作者id
         req.body.author_id = req.session.user.id;
         //提交时间
@@ -27,7 +29,7 @@ module.exports = {
         })
 
     },
-    handleArticalInfoGet:(req,res)=>{
+    handleArticleInfoGet:(req,res)=>{
         const id = req.params.id;
         const sql = 'select * from articles where id = ?';
         conn.query(sql,id,(err,result)=>{
@@ -43,5 +45,29 @@ module.exports = {
                 article: result[0]
             })
         })   
+    },
+    handleArticleEditGet:(req,res)=>{
+        if(!req.session.isLogin) return res.redirect('/');
+        const sql = 'select * from articles where id = ?';
+        conn.query(sql,req.params.id,(err,result)=>{
+            if(err) return res.send({status:500,msg:'获取编辑信息失败'});
+            //如果用户不是文章作者的话 跳转
+            if(result.length !=1 || req.session.user.id != result[0].author_id ) return res.redirect('/');
+
+            res.render('./article/edit.ejs',{
+                user: req.session.user,
+                isLogin: req.session.isLogin,
+                article: result[0]
+            })
+        })
+    },
+    handleArticleEditPost:(req,res)=>{
+        const sql = 'update articles set ? where id = ?';
+        conn.query(sql,[req.body,req.body.id],(err,result)=>{
+            if(err) return res.send({status:500,msg:'获取编辑文章失败'});
+            if(result.affectedRows != 1) return res.status(400).send({status: 400,msg: '编辑失败,请重试'});
+
+            res.send({status: 200,msg: 'success', articleId: req.body.id});
+        })
     }
 }
