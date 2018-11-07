@@ -1,0 +1,16 @@
+
+<%- include('../comm/header.ejs') %>
+<div class="container">
+    <h1>
+        <%= article.title %>
+        <!-- 判断是否是作者自己访问 -->
+        <% if(isLogin && user.id == article.author_id ) { %>
+        <a href="/articleEdit/<%= article.id %>" class="btn btn-info pull-right">编辑</a>
+        <% } %>
+    </h1>
+    <hr>
+    <div><%- article.content %></div>
+
+</div>
+
+<%- include('../comm/footer.ejs') %>
