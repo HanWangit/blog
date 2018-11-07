@@ -39,20 +39,20 @@ $(function(){
             data: $('form').serialize(),
             dataType: 'json',
             success:function(res){
-                console.log(res);
+                if(res.status !== 200){
+                    return alert(res.msg);
+                }
+                location.href = '/articleInfo';
             },
             error:function(err){
                 // alert();
-                console.log(err.responseJSON)
+                console.log(err.responseType)
             }
         })
 
         return false;
     })
 })
-
-
-
 
 </script>
 

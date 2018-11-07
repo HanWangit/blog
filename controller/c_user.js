@@ -49,6 +49,14 @@ module.exports = {
                 res.send({status: 200,msg: '注册成功',data:null})
             })
         })
+    },
+
+    handleLogoutGet:(req,res)=>{
+        req.session.destroy(function(err) {
+            // cannot access session here
+            if(err) return alert('注销失败,请重试') ;
+            res.redirect('/');
+          })
     }
 }
 

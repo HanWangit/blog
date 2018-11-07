@@ -13,6 +13,7 @@ router.post('/login',controllerUser.handleLoginPost);
 
 //注册业务逻辑
 router.post('/register',controllerUser.handleRegisterPost);
-
+//注销
+router.get('/logout',controllerUser.handleLogoutGet);
 
 module.exports = router
