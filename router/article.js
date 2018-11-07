@@ -7,5 +7,5 @@ router.get('/articleAdd',clr.handleArticalAddGet);
 
 router.post('/articleAdd',clr.handleArticalAddPost);
 
-router.get('/articleInfo',clr.handleArticalInfoGet);
+router.get('/articleInfo/:id',clr.handleArticalInfoGet);
 module.exports = router

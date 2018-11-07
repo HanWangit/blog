@@ -42,7 +42,8 @@ $(function(){
                 if(res.status !== 200){
                     return alert(res.msg);
                 }
-                location.href = '/articleInfo';
+                location.href = '/articleInfo/'+res.articleId;
+                // console.log(res);
             },
             error:function(err){
                 // alert();
