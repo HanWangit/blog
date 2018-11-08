@@ -17,39 +17,47 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="/">我的博客</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <% if(isLogin){ %>
-                    <!-- 欢迎 和 注销的按钮 -->
-                    <div class="nav navbar-form navbar-nav navbar-right">
-                        <button type="button" class="btn btn-warning">欢迎<strong><%=user.nickname%></strong></button>
-                        <a href="/logout" type="button" class="btn btn-danger">注销</a>
-                    </div>
-                    
-                    <!-- 发表 -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                aria-expanded="false">发表 <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/articleAdd">文章</a></li>
-                                <li><a href="javascript:;">问题</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                <!-- 欢迎 和 注销的按钮 -->
+                <div class="nav navbar-form navbar-nav navbar-right">
+                    <button type="button" class="btn btn-warning">欢迎<strong>
+                            <%=user.nickname%></strong></button>
+                    <a href="/logout" type="button" class="btn btn-danger">注销</a>
+                </div>
+
+                <!-- 发表 -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">发表 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/articleAdd">文章</a></li>
+                            <li><a href="javascript:;">问题</a></li>
+                        </ul>
+                    </li>
+                </ul>
 
                 <% }else{ %>
-                    <!-- 登录注册 -->
-                    <div class="nav navbar-form navbar-nav navbar-right">
-                        <a href="/login" class="btn btn-success">登录</a>
-                        <a href="/register" class="btn btn-primary">注册</a>
-                    </div>
+                <!-- 登录注册 -->
+                <div class="nav navbar-form navbar-nav navbar-right">
+                    <a href="/login" class="btn btn-success">登录</a>
+                    <a href="/register" class="btn btn-primary">注册</a>
+                </div>
                 <% } %>
-                
-                   
+
+
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
